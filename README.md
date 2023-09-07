@@ -1,2 +1,4 @@
 # kubernetes-demo
-demo for kubernetes
+A feladat manifest file-jai
+
+```kubectl apply -f .```

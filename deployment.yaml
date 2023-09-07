@@ -1,20 +1,65 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubernetes-demo-deployment
-  namespace: default
+  name: a-feladat-wordpress-deployment
+  namespace: a-feladat
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: kubernetes-demo-nginx
+      app: a-feladat-wordpress
   template:
     metadata:
       labels:
-        app: kubernetes-demo-nginx
-    spec:  
+        app: a-feladat-wordpress
+    spec: 
       containers:
-        - name: kubernetes-demo-nginx
-          image: nginxdemos/hello
-          ports:
-            - containerPort: 80
+      - image: wordpress:4.8-apache
+        name: wordpress
+        env:
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: "a-feladat-mysql-service"
+        - name: WORDPRESS_DB_USER
+          value: "wordpress"
+        - name: WORDPRESS_DB_PASSWORD
+          value: "wordpress-szuper-erűs"
+        - name: WORDPRESS_DB_NAME
+          value: "wordpress"
+        ports:
+        - containerPort: 80
+          name: wordpress
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: a-feladat-mysql-pod
+  namespace: a-feladat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: a-feladat-mysql
+  template:
+    metadata:
+      labels:
+        app: a-feladat-mysql
+    spec: 
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_DATABASE
+          value: "wordpress"
+        - name: MYSQL_USER
+          value: "wordpress"
+        - name: MYSQL_PASSWORD
+          value: "wordpress-szuper-erűs"
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: '1'
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+        ports:
+        - containerPort: 3306
+          name: mysql 
