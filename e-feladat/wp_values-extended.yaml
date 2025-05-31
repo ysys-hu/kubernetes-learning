@@ -1,0 +1,31 @@
+image:
+  registry: docker.io
+  repository: bitnami/wordpress
+  tag: 6.8.1-debian-12-r1
+
+wordpressUsername: ysolt
+wordpressPassword: ""
+
+wordpressEmail: ysolt@ysys.hu
+wordpressFirstName: Zsolt
+wordpressLastName: M
+wordpressBlogName: User's Blog!
+
+wordpressSkipInstall: false
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+mariadb:
+  enabled: true
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  pathType: ImplementationSpecific
+  ingressClassName: "nginx"
+  hostname: wordpress.<valami>.ysys.club
+  path: /
