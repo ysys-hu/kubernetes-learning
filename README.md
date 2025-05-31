@@ -1,7 +1,7 @@
 # Basics of Kubernetes
 
 ## Creating a Google Kuberenetes Cluster
-1. install Google Cloud SDK [installation guide](https://cloud.google.com/sdk/docs/install)
+1. Install Google Cloud SDK [installation guide](https://cloud.google.com/sdk/docs/install)
 2. After installation run `gcloud init`
 3. Select your project
 4. With you can create a cluster, with the following command(in this directory): `./gke-cluster.sh`
