@@ -1,0 +1,24 @@
+service.yaml README.md deployment.yamlapiVersion: v1
+kind: Service
+metadata:
+  name: a-feladat-wordpress-service
+  namespace: a-feladat
+spec:
+  selector:
+    app: a-feladat-wordpress
+  ports:
+    - protocol: TCP
+      port: 80
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: a-feladat-mysql-service
+  namespace: a-feladat
+spec:
+  selector:
+    app: a-feladat-mysql
+  ports:
+    - protocol: TCP
+      port: 3306
